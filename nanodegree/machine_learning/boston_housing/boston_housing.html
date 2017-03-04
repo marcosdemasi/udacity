@@ -274,17 +274,17 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Mean price of the data</span>
-<span class="n">mean_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Median price of the data</span>
 <span class="n">median_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
@@ -481,7 +481,7 @@ Regarding the LSTAT, I guess that 'MDEV' would rise as 'LSTAT' decreases. Since 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> 0.923</p>
+<p><strong>Answer:</strong> 0.923 which shold be considered an excellent number, once according to Rˆ2 theory this coefficient must be as closer as 100%. In our case we found 92,3% (a great number)</p>
 
 </div>
 </div>
@@ -1665,7 +1665,7 @@ A3iwZWZmZmZm1gD/D74E46UapY76AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> The graph where max_depth = 3 has the better relation training and test score. Here we can see that as we increase the number of training the Rˆ2 getting lower, however the Score achieve an acceptable level of approximately 0,8.</p>
+<p><strong>Answer: </strong> The graph where max_depth = 3 has the better relation training and test score. Here we can see that as we are increasing the number of training points, the Rˆ2 getting lower, however the Score achieve an acceptable level of approximately 0,8. This indicates a model with a notable amount of bias, thus more data would not improve the R^2 score. Compare that to the decision tree with a max depth of 10, which might benefit from some fresh training points.</p>
 
 </div>
 </div>
@@ -2148,7 +2148,8 @@ Ep8xxphOxRKfMcaYTsUSnzHGmE7l/wMB1YYdPoOgsQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong>When maximum depth is equal to 1 the model has a high bias. However, as you are training the system and increase the number of max depth the bias achieve a acceptable value at approximately 3 and 4 and after that the validation getting worse meaning that the model is overfitting.</p>
+<p><strong>Answer: </strong>When maximum depth is equal to 1 the model has a high bias. However, as you are training the system, we need to check the trends to be sure that we are on the best model. So, increasing the number of max depth the bias achieve a acceptable value at approximately 3 and 4 and after that the validation getting worst meaning that the model is overfitting. 
+At max depth 10, we have a case of overfitting. The training error is very low, but validation is leveling out with high error.</p>
 
 </div>
 </div>
@@ -2168,7 +2169,7 @@ Ep8xxphOxRKfMcaYTsUSnzHGmE7l/wMB1YYdPoOgsQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Something between 3 and 4. We can consider at 4.</p>
+<p><strong>Answer: </strong> Maximum depth of 4 is getting the best result. By checking the graph, if we analyse values greather than 4 we will notice that the Validation Score is getting lower, on the other hand, if we take max_depth lower than 4 the value of Trainning Score is getting worst.</p>
 
 </div>
 </div>
@@ -2255,7 +2256,7 @@ Ep8xxphOxRKfMcaYTsUSnzHGmE7l/wMB1YYdPoOgsQAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
@@ -2274,7 +2275,7 @@ Ep8xxphOxRKfMcaYTsUSnzHGmE7l/wMB1YYdPoOgsQAAAABJRU5ErkJggg==
     <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
 
     <span class="c1"># TODO: Create a dictionary for the parameter &#39;max_depth&#39; with a range from 1 to 10</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)}</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)}</span>
 
     <span class="c1"># TODO: Transform &#39;performance_metric&#39; into a scoring function using &#39;make_scorer&#39; </span>
     <span class="n">scoring_fnc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">performance_metric</span><span class="p">)</span>
@@ -2317,7 +2318,7 @@ Ep8xxphOxRKfMcaYTsUSnzHGmE7l/wMB1YYdPoOgsQAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c1"># Fit the training data to the model using grid search</span>
@@ -2351,7 +2352,7 @@ Ep8xxphOxRKfMcaYTsUSnzHGmE7l/wMB1YYdPoOgsQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong>4</p>
+<p><strong>Answer: </strong> 'max_depth' is 4 for the optimal model. Which is exaclty the same result found in question 6. Meaning that it is indeed the best result for the model.</p>
 
 </div>
 </div>
